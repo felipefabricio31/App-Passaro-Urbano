@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OfertasService } from '../ofertas.service'
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,10 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit()
+  {
+    let Ofertas: OfertasService = new OfertasService()
+    console.log(Ofertas.getOfertas())
   }
 
 }
