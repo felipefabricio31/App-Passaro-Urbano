@@ -6,11 +6,11 @@ import { Oferta } from '../shared/oferta.model'
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [OfertasService] //Array de metadados
+  providers: [ OfertasService ] //Array de metadados
 })
 export class HomeComponent implements OnInit
 {
-  public Ofertas: Oferta[]
+  public ofertas: Oferta[]
 
   constructor(private ofertasServices: OfertasService) 
   { 
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit
 
   ngOnInit()
   {
-    this.Ofertas = this.ofertasServices.getOfertas()
-    console.log(this.Ofertas)
+    this.ofertas = this.ofertasServices.getOfertas()
+    console.log(this.ofertas)
   }
 }
