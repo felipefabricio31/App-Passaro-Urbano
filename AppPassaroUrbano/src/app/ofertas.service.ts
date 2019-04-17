@@ -6,8 +6,7 @@ import { Oferta } from './shared/oferta.model'
 @Injectable()
 export class OfertasService {
 
-    constructor(private http: Http)
-    {
+    constructor(private http: Http) {
 
     }
 
@@ -15,8 +14,14 @@ export class OfertasService {
         //Efeturar uma requisição http
         return this.http.get('http://localhost:3000/ofertas?destaque=true')
             .toPromise()
-            .then(( resposta: any)  =>  resposta.json())
+            .then((resposta: any) => resposta.json())
         //Retornar um promisse Oferta[]
+    }
+
+    public getOfertasPorCategoria(categoria: string): Promise<Oferta[]> {
+        return this.http.get(`http://localhost:3000/ofertas?categoria=${categoria}`)
+            .toPromise()
+            .then((resposta: any) => resposta.json())
     }
 
 }
