@@ -9,16 +9,27 @@ import { ActivatedRoute } from '@angular/router'
 export class OfertaComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {
-   }
+  }
 
   ngOnInit() {
-    console.log('id recuperado da rota: ', this.route.snapshot.params['id'])
+    //console.log('id recuperado da rota: ', this.route.snapshot.params['id'])
+    this.route.params.subscribe((parametro: any) => {
+      console.log(parametro.id)
+    })
   }
 }
 
 /*
-O Angular Router permite que você recupere facilmente parâmetros do URL, 
-que é uma funcionalidade essencial que é exigida pela maioria dos aplicativos da web. 
-Você pode usar os dois modos: o paramMapobservável ou o instantâneo, mas o segundo requer 
-que você tenha cuidado ao reutilizar componentes. 
+O Angular Router permite que você recupere facilmente parâmetros do URL,
+que é uma funcionalidade essencial que é exigida pela maioria dos aplicativos da web.
+Você pode usar os dois modos: o paramMapobservável ou o instantâneo, mas o segundo requer
+que você tenha cuidado ao reutilizar componentes.
+
+Subscribe - 
+this.route.params.subscribe((parametro: any) => {
+console.log(parametro.id)
+})
+
+Snapshot
+console.log('id recuperado da rota: ', this.route.snapshot.params['id'])
 */
