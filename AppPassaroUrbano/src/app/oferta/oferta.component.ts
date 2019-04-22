@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { OfertasService } from '../ofertas.service'
 import { Oferta } from '../shared/oferta.model'
 import { Observable } from 'rxjs/observable';
 import 'rxjs/Rx'
-import { concatAll } from 'rxjs/operators';
+import { Subscription } from 'rxjs/Subscription';
 import { Observer } from 'rxjs/Rx';
 
 @Component({
@@ -13,9 +13,11 @@ import { Observer } from 'rxjs/Rx';
   styleUrls: ['./oferta.component.css'],
   providers: [OfertasService]
 })
-export class OfertaComponent implements OnInit {
+export class OfertaComponent implements OnInit, OnDestroy {
 
   public oferta: Oferta
+  private tempoObservableSubscription: Subscription
+  private meuObservableTesteSubscription: Subscription
 
   constructor(
     private route: ActivatedRoute,
@@ -28,35 +30,39 @@ export class OfertaComponent implements OnInit {
       .then((oferta: Oferta) => {
         this.oferta = oferta
       })
-/*
-      //Observables na Pratica
-      this.route.params.subscribe(
-        (parametro: any) =>  { console.log(parametro) }),
-        (erro: any) => {}
-        () => console.log('Processamento foi classificado como concluído!')
+    /*
+          //Observables na Pratica
+          this.route.params.subscribe(
+            (parametro: any) =>  { console.log(parametro) }),
+            (erro: any) => {}
+            () => console.log('Processamento foi classificado como concluído!')
+    
+    */
+    let tempo = Observable.interval(2000)
+    this.tempoObservableSubscription = tempo.subscribe((intervalo: number) => {
+      console.log(intervalo)
+    })
 
 
-        let tempo = Observable.interval(2000)
-        tempo.subscribe(( intervalo: number ) => {
-          console.log(intervalo)
-        })
-        */
+    //Observable (Observável)
+    let meuObservaleTeste = Observable.create((observer: Observer<number>) => {
+      observer.next(1)
+      observer.next(2)
+      observer.error('Algum erro foi encontrado na stream de eventos.')
+      observer.complete()
+    })
 
-        //Observable (Observável)
-        let meuObservaleTeste = Observable.create(( observer: Observer<string>) =>
-        {
-          observer.next('Primeiro Evento da stream.')
-          observer.next('Segundo Evento da stream.')
-          observer.error('Algum erro foi encontrado na stream de eventos.')
-          observer.complete()
-        })
+    //Observable (Observador)
+    this.meuObservableTesteSubscription = meuObservaleTeste.subscribe(
+      (resultado: any) => console.log(resultado),
+      (erro: string) => console.log(erro),
+      () => console.log('Complete observer.')
+    )
+  }
 
-        //Observable (Observador)
-        meuObservaleTeste.subscribe(
-          (resultado: any) => console.log(resultado), 
-          (erro: string) => console.log(erro),
-          () => console.log('Complete observer.')
-        )
+  ngOnDestroy() {
+    this.meuObservableTesteSubscription.unsubscribe()
+    this.tempoObservableSubscription.unsubscribe()
   }
 }
 
