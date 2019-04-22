@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { OfertasService } from '../ofertas.service'
 import { Oferta } from '../shared/oferta.model'
+import { Observable } from 'rxjs/observable';
+import 'rxjs/Rx'
+import { concatAll } from 'rxjs/operators';
+import { Observer } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-oferta',
@@ -24,13 +28,30 @@ export class OfertaComponent implements OnInit {
       .then((oferta: Oferta) => {
         this.oferta = oferta
       })
-
+/*
       //Observables na Pratica
       this.route.params.subscribe(
         (parametro: any) =>  { console.log(parametro) }),
         (erro: any) => {}
         () => console.log('Processamento foi classificado como concluído!')
 
+
+        let tempo = Observable.interval(2000)
+        tempo.subscribe(( intervalo: number ) => {
+          console.log(intervalo)
+        })
+        */
+
+        //Observable (Observável)
+        let meuObservaleTeste = Observable.create(( observer: Observer<string>) =>
+        {
+          observer.next('Primeiro Evento da stream.')
+        })
+        
+        //Observable (Observador)
+        meuObservaleTeste.subscribe(
+          (resultado: any) => console.log(resultado)
+        )
   }
 }
 
