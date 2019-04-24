@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable'
 import { OfertasService } from '../ofertas.service'
 import { Oferta } from '../shared/oferta.model'
 import { Subject } from 'rxjs/Subject'
-
 import { of } from 'rxjs';
 
 @Component({
