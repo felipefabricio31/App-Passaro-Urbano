@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { OfertasService } from '../ofertas.service'
 import { Oferta } from '../shared/oferta.model'
-import 'rxjs/Rx'
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/Rx'
 
 @Component({
   selector: 'app-oferta',
