@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivationEnd } from '@angular/router'
+import { ActivatedRoute, Params } from '@angular/router'
 import { OfertasService } from '../../ofertas.service'
 import { Oferta } from 'src/app/shared/oferta.model';
 
@@ -7,7 +7,7 @@ import { Oferta } from 'src/app/shared/oferta.model';
   selector: 'app-como-usar',
   templateUrl: './como-usar.component.html',
   styleUrls: ['./como-usar.component.css'],
-  providers: [ OfertasService ]
+  providers: [OfertasService]
 })
 export class ComoUsarComponent implements OnInit {
 
@@ -16,14 +16,16 @@ export class ComoUsarComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private ofertaService: OfertasService
-    ) { }
+  ) { }
 
   ngOnInit() {
-    
-    this.ofertaService.getComoUsarOfertaPorId(this.route.parent.snapshot.params['id'])
-    .then((descricao: string) => {
-      this.comoUsar = descricao
+
+    this.route.parent.params.subscribe((parametros: Params) => {
+
+    this.ofertaService.getComoUsarOfertaPorId(parametros.id)
+      .then((descricao: string) => {
+        this.comoUsar = descricao
+      })
     })
   }
-
 }
