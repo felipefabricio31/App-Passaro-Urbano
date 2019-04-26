@@ -36,11 +36,6 @@ export class TopoComponent implements OnInit {
         //console.log(err)
         return Observable.of<Oferta[]>([])
       })
-
-    this.ofertas.subscribe((ofertas: Oferta[]) => {
-      this.ofertas2 = ofertas 
-      console.log(ofertas)
-    })
   }
 
   public pesquisa(termoDaBusca: string): void {
