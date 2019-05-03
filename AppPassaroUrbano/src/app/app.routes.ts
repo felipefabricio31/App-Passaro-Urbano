@@ -19,5 +19,5 @@ export const ROUTES: Routes = [
                 { path: 'onde-fica', component: OndeFicaComponent }
         ] 
     },
-    { path: 'ordemCompra', component: OrdemCompraComponent }
+    { path: 'ordem-compra', component: OrdemCompraComponent }
 ]
