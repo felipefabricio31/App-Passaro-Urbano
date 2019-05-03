@@ -199,20 +199,6 @@
       "complemento": "Casa 09",
       "formaPagamento": "Débito",
       "id": 2
-    },
-    {
-      "endereco": "Rua Teste",
-      "numero": "3",
-      "complemento": "Casa A",
-      "formaPagamento": "Débito",
-      "id": 3
-    },
-    {
-      "endereco": "RUA JOSE ARAUJO",
-      "numero": "540",
-      "complemento": "Casa9",
-      "formaPagamento": "Débito",
-      "id": 4
     }
   ]
 }
