@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { OrdemCompraService } from '../ordem-compra.service'
+import { Pedido } from '../shared/pedido.model';
 
 @Component({
   selector: 'app-ordem-compra',
   templateUrl: './ordem-compra.component.html',
-  styleUrls: ['./ordem-compra.component.css']
+  styleUrls: ['./ordem-compra.component.css'],
+  providers: [ OrdemCompraService ]
 })
 export class OrdemCompraComponent implements OnInit {
+
+  //Pedido
+  public pedido: Pedido = new Pedido('','','','')
 
   public endereco: string = ''
   public numero: string = ''
@@ -27,9 +33,10 @@ export class OrdemCompraComponent implements OnInit {
   //controlar botão confirmar compra
   public formEstado: string = 'disabled'
 
-  constructor() { }
+  constructor( private ordemCompraService: OrdemCompraService) { }
 
   ngOnInit() {
+    //this.ordemCompraService.efetivarCompra()
   }
 
   public atualizaEndereco(endereco: string): void {
@@ -98,6 +105,16 @@ export class OrdemCompraComponent implements OnInit {
     else {
       this.formEstado = 'disabled'
     }
+  }
+
+  public confirmarCompra(): void
+  {
+    this.pedido.endereco = this.endereco
+    this.pedido.numero = this.numero
+    this.pedido.complemento = this.complemento
+    this.pedido.formaPagamento = this.formaPagamento
+
+    this.ordemCompraService.efetivarCompra(this.pedido)
   }
 
 }
