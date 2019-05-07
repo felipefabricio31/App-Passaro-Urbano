@@ -5,11 +5,13 @@ import { Oferta } from '../shared/oferta.model'
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/Rx'
 
+import { CarrinhoService } from '../carrinho.service'
+
 @Component({
   selector: 'app-oferta',
   templateUrl: './oferta.component.html',
   styleUrls: ['./oferta.component.css'],
-  providers: [OfertasService]
+  providers: [OfertasService, CarrinhoService]
 })
 export class OfertaComponent implements OnInit, OnDestroy {
 
@@ -19,10 +21,13 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private ofertasService: OfertasService) {
-  }
+    private ofertasService: OfertasService,
+    private carrinhoService: CarrinhoService
+  ) { }
 
   ngOnInit() {
+
+    console.log('Array de Itens: ', this.carrinhoService.exibirItens())
 
     this.route.params.subscribe((parametros: Params) => {
       //console.log('id recuperado da rota: ', this.route.snapshot.params['id'])
@@ -34,5 +39,9 @@ export class OfertaComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+  }
+
+  public adicionarItemCarrinho(oferta: Oferta): void {
+    this.carrinhoService.incluirItem(this.oferta)
   }
 }
