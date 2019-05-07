@@ -3,7 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule} from '@angular/http'
 import { RouterModule } from '@angular/router'
 import { ROUTES } from './app.routes'
-import { FormsModule } from '@angular/forms'
+//import { FormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import localePt from '@angular/common/locales/pt';
 import { DescricaoReduzida } from './util/descricao-reduzida.pipe';
 import { OrdemCompraComponent } from "./ordem-compra/ordem-compra.component";
 import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra-sucesso.component'
+import { ReactiveFormsModule } from '@angular/forms';
 
 // the second parameter 'fr' is optional
 registerLocaleData(localePt, 'pt');
@@ -45,7 +46,8 @@ registerLocaleData(localePt, 'pt');
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    FormsModule,
+    //FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [ { provide: LOCALE_ID, useValue: 'pt-BR'} ],

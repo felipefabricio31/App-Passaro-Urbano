@@ -1,39 +1,57 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrdemCompraService } from '../ordem-compra.service'
 import { Pedido } from '../shared/pedido.model'
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-ordem-compra',
   templateUrl: './ordem-compra.component.html',
   styleUrls: ['./ordem-compra.component.css'],
-  providers: [ OrdemCompraService ]
+  providers: [OrdemCompraService]
 })
 export class OrdemCompraComponent implements OnInit {
 
-  @ViewChild('formulario') public f: NgForm
+  public idPedidoCompra:number = undefined
 
-  public idPedidoCompra: number
+  //Validação do formulário (forma mais correta)
+  public formulario: FormGroup = new FormGroup({
+    'Endereco': new FormControl(null, [ Validators.required, Validators.minLength(3), Validators.maxLength(120) ]),
+    'Numero': new FormControl(null, [ Validators.required, Validators.minLength(1), Validators.maxLength(20)] ),
+    'Complemento': new FormControl(null, null ),
+    'FormaPagamento': new FormControl(null, [Validators.required])
+  })
 
   constructor(private ordemCompraService: OrdemCompraService) { }
 
   ngOnInit() {
-    
   }
 
-  public confirmarCompras(): void {
+  public confirmarCompra(): void {
+    console.log(this.formulario.status)
 
-    //Cria um pedido com as informações recebidas do formulário
-    let pedido: Pedido = new Pedido(
-      this.f.value.endereco,
-       this.f.value.numero,
-       this.f.value.complemento,
-       this.f.value.formaPagamento)
+    if(this.formulario.status === 'INVALID')
+    {
+      console.log(this.formulario.status)
 
-    this.ordemCompraService.efetivarCompra(pedido)
-    .subscribe((idPedido: number) => {
-      //console.log('Pedido cadastrado com sucesso - Pedido: ' + idPedido)
-      this.idPedidoCompra = idPedido
-    })
+      this.formulario.get('Endereco').markAsTouched()
+      this.formulario.get('Numero').markAsTouched()
+      //this.formulario.get('Complemento').markAsTouched()
+      this.formulario.get('FormaPagamento').markAsTouched()
+    }
+    else
+    {
+      let pedido: Pedido = new Pedido(
+        this.formulario.value.Endereco,
+        this.formulario.value.Numero,
+        this.formulario.value.Complemento,
+        this.formulario.value.FormaPagamento
+      )
+      
+      this.ordemCompraService.efetivarCompra(pedido)
+      .subscribe(( idPedido: number) => {
+        this.idPedidoCompra = idPedido
+        console.log(this.idPedidoCompra)
+      })
+    }
   }
 }

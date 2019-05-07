@@ -192,13 +192,6 @@
       "complemento": "Casa",
       "formaPagamento": "Débito",
       "id": 1
-    },
-    {
-      "endereco": "Rua do Olavo",
-      "numero": "435",
-      "complemento": "Casa 09",
-      "formaPagamento": "Débito",
-      "id": 2
     }
   ]
 }
