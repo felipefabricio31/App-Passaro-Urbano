@@ -11,7 +11,7 @@ import { CarrinhoService } from '../carrinho.service'
   selector: 'app-oferta',
   templateUrl: './oferta.component.html',
   styleUrls: ['./oferta.component.css'],
-  providers: [OfertasService, CarrinhoService]
+  providers: [OfertasService]
 })
 export class OfertaComponent implements OnInit, OnDestroy {
 
@@ -27,8 +27,6 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    console.log('Array de Itens: ', this.carrinhoService.exibirItens())
-
     this.route.params.subscribe((parametros: Params) => {
       //console.log('id recuperado da rota: ', this.route.snapshot.params['id'])
       this.ofertasService.getOfertasPorId(parametros.id)
@@ -41,7 +39,9 @@ export class OfertaComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  public adicionarItemCarrinho(oferta: Oferta): void {
+  public adicionarItemCarrinho(oferta: Oferta): void
+  {
     this.carrinhoService.incluirItem(this.oferta)
+    console.log(this.carrinhoService.exibirItens())
   }
 }

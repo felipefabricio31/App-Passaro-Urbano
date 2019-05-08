@@ -192,6 +192,54 @@
       "complemento": "Casa",
       "formaPagamento": "Débito",
       "id": 1
+    },
+    {
+      "endereco": "Rua Arlindo Teste",
+      "numero": "587",
+      "complemento": "Casa2",
+      "formaPagamento": "dinheiro",
+      "itens": [
+        {
+          "id": 1,
+          "img": {
+            "url": "/assets/ofertas/1/img1.jpg"
+          },
+          "titulo": "Super Burger",
+          "descricao_oferta": "Rodízio de Mini-hambúrger com opção de entrada.",
+          "valor": 29.9,
+          "quantidade": 1
+        },
+        {
+          "id": 5,
+          "img": {
+            "url": "/assets/ofertas/5/img1.jpg"
+          },
+          "titulo": "Kart",
+          "descricao_oferta": "Bateria de Kart de 30 minutos.",
+          "valor": 54.9,
+          "quantidade": 3
+        }
+      ],
+      "id": 2
+    },
+    {
+      "endereco": "Rua Miguel do Nascimento",
+      "numero": "173",
+      "complemento": "Casa",
+      "formaPagamento": "dinheiro",
+      "itens": [
+        {
+          "id": 3,
+          "img": {
+            "url": "/assets/ofertas/3/img1.jpg"
+          },
+          "titulo": "Pizzas Grandes",
+          "descricao_oferta": "Pizza Grande, Mussarela, Marguerita ou outras!",
+          "valor": 21.9,
+          "quantidade": 2
+        }
+      ],
+      "id": 3
     }
   ]
 }
