@@ -61,7 +61,7 @@ export class OrdemCompraComponent implements OnInit {
           .subscribe((idPedido: number) => {
             this.idPedidoCompra = idPedido
 
-            this.carrinhoService.limparCarrinho();
+            this.carrinhoService.limparCarrinho()
           })
       }
     }
